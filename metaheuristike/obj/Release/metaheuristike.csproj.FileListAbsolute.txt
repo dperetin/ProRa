@@ -16,3 +16,9 @@ D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Rele
 D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\metaheuristike.csproj.GenerateResource.Cache
 C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.exe
 C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.pdb
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\bin\Release\metaheuristike.exe
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\bin\Release\metaheuristike.pdb
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\ProRa.Form1.resources
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.Properties.Resources.resources
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.csproj.GenerateResource.Cache
