@@ -1,0 +1,37 @@
+Arbanas 1 31417
+Bakic 1 21501
+Basic 0 31408 36904
+Bujanovic 0 36901 24206
+Conar 0 21498
+Doko 0 36901
+Gecek 0 36905
+Gogic 0 21498
+Guljas 1 21498
+Kazalicki 0 21501 36901
+Krcandinac 1 21504 36904
+Kozic 0 24206
+Kukavica 1 31417
+Lubura 0 21498
+Manger 1 24206
+Manhart 0 24206
+Marohnic 0 36904
+Muha 0 21501
+Nakic 1 36904
+Nogo 1 36901
+Pandzic 1 31408
+Pazanin 1 21504
+Perse 1 21501
+Prlic 0 21504
+Rabar 0 36905
+Sarapa 1 36905
+Sego 0 36901
+Sikic 1 21498
+Singer 1 36901
+Starcevic 0 21501
+Stojic 0 36904
+Tafro 0 21504 36905
+Tambaca 1 31408
+Trupcevic 0 21498 21504
+Valent 0 31408
+Vidak 0 31408
+Vrbaski 0 21501

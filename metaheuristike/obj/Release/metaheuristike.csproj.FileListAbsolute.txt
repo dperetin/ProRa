@@ -1,0 +1,18 @@
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\bin\Release\metaheuristike.exe
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\bin\Release\metaheuristike.pdb
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Release\ProRa.Form1.resources
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Release\metaheuristike.Properties.Resources.resources
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Release\metaheuristike.csproj.GenerateResource.Cache
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Release\metaheuristike.exe
+C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Release\metaheuristike.pdb
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\metaheuristike.exe
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\metaheuristike.pdb
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\bin\Release\metaheuristike.exe
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\bin\Release\metaheuristike.pdb
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\ResolveAssemblyReference.cache
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\ProRa.Form1.resources
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\metaheuristike.Properties.Resources.resources
+D:\Documents\My Dropbox\BACKUP\2011_02_09\metaheuristike\metaheuristike\obj\Release\metaheuristike.csproj.GenerateResource.Cache
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.exe
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.pdb
