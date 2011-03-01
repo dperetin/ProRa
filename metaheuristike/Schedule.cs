@@ -736,7 +736,7 @@ namespace ProRa
         {
 	        score = 0;
 	        double suma = 0;
-	        double[] w = {10, 1, 1, 7, 10, 10, 1};
+	        double[] w = {10, 1, 1, 7, 10, 0, 1};
 	        int[] s = {0, 0, 0, 0, 0, 0, 0};
 	        //list<Group>::iterator it;
 	        //for (it = groupList.begin(); it != groupList.end(); it++) {
