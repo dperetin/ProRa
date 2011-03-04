@@ -397,6 +397,7 @@ namespace ProRa
         public void timetabler()
         {
             int[] w = {1, 1, 10, 20, 20};
+            raspored ra = new raspored(this);
             while (true)
             {
                 foreach (Event it in UnasignedEvents)

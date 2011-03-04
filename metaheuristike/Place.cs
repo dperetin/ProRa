@@ -21,4 +21,21 @@ namespace ProRa
 	    public int score;
 
     }
+    struct raspored
+    {
+        int[, ,] sobe;
+        int[, ,] profesori;
+        int[, ,] kolegiji;
+        int[, ,] grupe;
+        int[,] eventi;
+
+        public raspored(Schedule podaci)
+        {
+            sobe = new int[podaci.ClassroomList.Count,5,12];
+            profesori = new int[podaci.LecturerList.Count, 5, 12];
+            kolegiji = new int[podaci.CourseList.Count, 5, 12];
+            grupe = new int[podaci.GroupList.Count, 5, 12];
+            eventi = new int[podaci.EventList.Count, 3];
+        }
+    }
 }
