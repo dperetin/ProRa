@@ -397,7 +397,7 @@ namespace ProRa
         public void timetabler()
         {
             int[] w = {1, 1, 10, 20, 20};
-            raspored ra = new raspored(this);
+            Raspored ra = new Raspored(this);
             while (true)
             {
                 foreach (Event it in UnasignedEvents)
@@ -424,7 +424,7 @@ namespace ProRa
                             for (int j = 0; j < 12; j++)
                             {
                                 // za sad samo brojim koliko soba ima slobodnih termina!!
-                                if (soba.isAvailable(i, j, t) == false)
+                                if (ra.isRoomAvailable(soba.Id, i, j, t) == false)
                                     tmp_score++;
                             }
 						      
@@ -518,6 +518,8 @@ namespace ProRa
                     }
                 }
                 getEventByID(minEvent.getID()).setLecturer(findLecturer(profesor.getID()));
+
+                ra.SetLecturer(minEvent.getID(), profesor.getID());
 
                 //Group grupa = findGroup(*grupe.begin());
                 Course k = minEvent.getCourse();
