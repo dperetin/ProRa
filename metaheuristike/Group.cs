@@ -22,7 +22,7 @@ namespace ProRa
         }
         public string getName(){return Name;}
         public int getSize(){return Size;}
-        public bool isAvailable(int i, int j, int t)
+    /*    public bool isAvailable(int i, int j, int t)
         {
             int status = 0;
             if (t + j > 13)
@@ -33,7 +33,7 @@ namespace ProRa
                 return true;
             else
                 return false;
-        }
+        }*/
         public void setEvent(int i, int j, Event e)
         {
             for (int k = 0; k < e.getDuration(); k++)

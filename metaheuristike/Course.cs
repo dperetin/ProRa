@@ -60,7 +60,7 @@ namespace ProRa
                 
                         this.week[i, j + k]--;
         }
-        public bool isAvailable(int i, int j, int t)
+  /*      public bool isAvailable(int i, int j, int t)
         {
             int status = 0;
             if (t + j > 13)
@@ -71,6 +71,6 @@ namespace ProRa
                 return true;
             else
                 return false;
-        }
+        }*/
     }
 }

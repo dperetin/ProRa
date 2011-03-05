@@ -7,14 +7,23 @@ namespace ProRa
 {
     class Classroom
     {
+        static int Count = 0;
+        int countID;
         string ID;
 	    int Capacity;
 	    int Projector; // 0 nema, 1 ima
 	    int Type;      // 0 predavaona, 1 praktikum
         public int[,] week = new int[5, 12];
 
+        public int Id
+        {
+            get { return countID; }
+        }
+
         public Classroom(string I, int C, int P, int T)
         {
+            countID = Count;
+            Count++;
             ID = I;
             Capacity = C;
             Projector = P;
@@ -30,7 +39,7 @@ namespace ProRa
 		    return false;
 		
 	    }
-        public bool isAvailable(int i, int j, int t) {
+  /*      public bool isAvailable(int i, int j, int t) {
 		    int status = 0;
             if (t + j > 12)
                 return false;
@@ -40,7 +49,7 @@ namespace ProRa
 			    return true;
 		    else
 			    return false;
-	    }
+	    }*/
         public int getCapacity(){return Capacity;}
         public int getProjector() { return Projector; }
         public int getType() { return Type; }

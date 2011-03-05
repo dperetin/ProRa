@@ -37,7 +37,7 @@ namespace ProRa
         public int getType() { return Type; }
         public int getLoad() { return Load; }
         public int getID() { return ID; }
-        public bool isAvailable(int i, int j, int t)
+   /*     public bool isAvailable(int i, int j, int t)
         {
             int status = 0;
             if (t + j > 12)
@@ -48,7 +48,7 @@ namespace ProRa
                 return true;
             else
                 return false;
-        }
+        }*/
         public void setEvent(int i, int j, Event e)
         {
             for (int k = 0; k < e.getDuration(); k++)
