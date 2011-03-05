@@ -85,10 +85,12 @@ namespace ProRa
 
         private void button6_Click(object sender, EventArgs e)
         {
-            podaci.timetabler();
-            best = podaci.deepCopy();
+            Raspored r = podaci.timetabler();
+            r.generateHtml("dejan.html", podaci);
+          
+      /*      best = podaci.deepCopy();
             button7.Enabled = true;
-            
+       */     
 
         }
 
@@ -182,7 +184,7 @@ namespace ProRa
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             //label1.Text = "Dejan";
-            Schedule temp = new Schedule();
+   /*         Schedule temp = new Schedule();
             temp = podaci.deepCopy();
             
             int[] bad0 = new int[7];
@@ -300,7 +302,7 @@ namespace ProRa
                 temp.getEventByID(promjenjeniEvent).tabu = korak;
                 //label2.Text = promjenjeniEvent.ToString();
                 
-            }
+            }*/
             //label2.Text = "ERROR" + br.ToString();
         }
 

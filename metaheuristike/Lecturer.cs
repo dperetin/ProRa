@@ -14,6 +14,11 @@ namespace ProRa
 	    int Load;
         public int[,] week = new int[5, 12];
 
+        public int Id
+        {
+            get { return ID; }
+        }
+
         public Lecturer(int I, string N, List<string> K, int T)
         {
             ID = I;

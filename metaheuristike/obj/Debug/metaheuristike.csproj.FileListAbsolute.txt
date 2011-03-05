@@ -6,3 +6,11 @@ C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\bin\Debug\metaheuristike.pd
 C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Debug\metaheuristike.exe
 C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Debug\metaheuristike.pdb
 C:\Users\Dejan\Desktop\metaheuristike\metaheuristike\obj\Debug\ProRa.Form1.resources
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Debug\metaheuristike.exe
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Debug\metaheuristike.pdb
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\bin\Debug\metaheuristike.exe
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\bin\Debug\metaheuristike.pdb
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Debug\ProRa.Form1.resources
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Debug\metaheuristike.Properties.Resources.resources
+C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Debug\metaheuristike.csproj.GenerateResource.Cache

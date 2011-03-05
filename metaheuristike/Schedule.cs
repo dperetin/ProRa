@@ -52,7 +52,7 @@ namespace ProRa
             else
                 return 0;
         }
-        public Schedule krizaj(Schedule y)
+        /*public Schedule krizaj(Schedule y)
         {
             Schedule raspored = new Schedule();
             foreach (Course c in CourseList)
@@ -161,7 +161,7 @@ namespace ProRa
                 raspored.UnasignedEvents.Add(c);*/
             // preci po svima i updejtat week
 
-            return raspored;
+   /*         return raspored;
         }
 
        /* public Schedule copy()
@@ -197,7 +197,7 @@ namespace ProRa
             return raspored;
 
         }*/
-        public Schedule deepCopy()
+   /*     public Schedule deepCopy()
         {
 
             Schedule raspored = new Schedule();
@@ -394,7 +394,7 @@ namespace ProRa
             return null;
         }
 
-        public void timetabler()
+        public Raspored timetabler()
         {
             int[] w = {1, 1, 10, 20, 20};
             Raspored ra = new Raspored(this);
@@ -424,7 +424,7 @@ namespace ProRa
                             for (int j = 0; j < 12; j++)
                             {
                                 // za sad samo brojim koliko soba ima slobodnih termina!!
-                                if (ra.isRoomAvailable(soba.Id, i, j, t) == false)
+                                if (ra.IsRoomAvailable(soba.Id, i, j, t) == false)
                                     tmp_score++;
                             }
 						      
@@ -492,18 +492,6 @@ namespace ProRa
                         prof.Add(pi);
                 }
 
-                /*
-                 Lecturer *profesor;
-        list<Lecturer *>::iterator pi2 = prof.begin();
-        int minLoad = (*pi2)->getLoad();
-        profesor = *pi2;
-        for (; pi2 != prof.end(); pi2++) {
-            if ((*pi2)->getLoad() <= minLoad) {
-                minLoad = (*pi2)->getLoad();
-                profesor = *pi2;
-            }
-        }*/
-
                 Lecturer profesor = null;
                 int minLoad = 0;
                 profesor = prof.First();
@@ -521,7 +509,7 @@ namespace ProRa
 
                 ra.SetLecturer(minEvent.getID(), profesor.getID());
 
-                //Group grupa = findGroup(*grupe.begin());
+                
                 Course k = minEvent.getCourse();
 
                 List<Classroom> predavaone = new List<Classroom>();
@@ -541,14 +529,14 @@ namespace ProRa
                     {
                         for (int j = 0; j < 12; j++)
                         {
-                            if (tt.isAvailable(i, j, minEvent.getDuration()) == false)
+                            if (ra.IsRoomAvailable(tt.Id, i, j, minEvent.getDuration()) == false)
                                 continue;
-                            if (profesor.isAvailable(i, j, minEvent.getDuration()) == false)
+                            if (ra.IsLecturerAvailable(profesor.Id, i, j, minEvent.getDuration()) == false)
                                 continue;
                             int free = 0;
                             foreach (string g in minEvent.getGroups())
                             {
-                                if (findGroup(g).isAvailable(i, j, minEvent.getDuration()) == false)
+                                if (ra.IsGroupAvailable(findGroup(g).Id, i, j, minEvent.getDuration()) == false)
                                 {
                                     free++;
                                 }
@@ -574,7 +562,7 @@ namespace ProRa
 					
 					        foreach (Classroom ci in predavaone) 
                             {
-                                if (ci.isAvailable(i, j, minEvent.getDuration()) == false)
+                                if (ra.IsRoomAvailable(ci.Id, i, j, minEvent.getDuration()) == false)
                                     q2++;
 					        }
 					        tmp.q[1] = q2;
@@ -626,17 +614,24 @@ namespace ProRa
                 }
                 /////
                 int ID = minEvent.getID();
-                getEventByID(ID).setClassroom(getRoomByID(minPlace.soba.getID()));
+ /*               getEventByID(ID).setClassroom(getRoomByID(minPlace.soba.getID()));
                 getEventByID(ID).setPlace(minPlace);
-                getEventByID(ID).getCourse().setEvent(minPlace.i, minPlace.j, minEvent);
+                getEventByID(ID).getCourse().setEvent(minPlace.i, minPlace.j, minEvent);*/
+
+                ra.SetClassroom(ID, minPlace.soba.Id);
+
+
                 Classroom b = getRoomByID(minPlace.soba.getID());
 
-                b.setEvent(minPlace.i, minPlace.j, minEvent);
-                profesor.setEvent(minPlace.i, minPlace.j, minEvent);
+               // b.setEvent(minPlace.i, minPlace.j, minEvent);
+                ra.SetClassroomEvent(b.Id, minPlace.i, minPlace.j, minEvent.getDuration(), minEvent.getID());
+               // profesor.setEvent(minPlace.i, minPlace.j, minEvent);
+                ra.SetLecturerEvent(profesor.Id, minPlace.i, minPlace.j, minEvent.getDuration(), minEvent.getID());
                 profesor.incLoad();
                 foreach (string g in minEvent.getGroups())
                 {
-                    findGroup(g).setEvent(minPlace.i, minPlace.j, minEvent);
+                    //findGroup(g).setEvent(minPlace.i, minPlace.j, minEvent);
+                    ra.SetGroupEvent(findGroup(g).Id, minPlace.i, minPlace.j, minEvent.getDuration(), minEvent.getID());
                 }
                 UnasignedEvents.Remove(minEvent);
 
@@ -658,6 +653,7 @@ namespace ProRa
       
 
             }
+            return ra;
         }
 
         public Event getEventByID(int ID) 
@@ -948,7 +944,7 @@ namespace ProRa
 
         }
 
-        public void tabuSearch()
+  /*      public void tabuSearch()
         {
             Schedule temp = new Schedule();
             temp = this.deepCopy();
@@ -1021,6 +1017,13 @@ namespace ProRa
                 }
                 temp = best.deepCopy();
             }
+        }*/
+        public Group GetGroupById(int i)
+        {
+            foreach (Group g in GroupList)
+                if (g.Id == i)
+                    return g;
+            return null;
         }
     }
 }

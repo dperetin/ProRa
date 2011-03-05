@@ -7,12 +7,21 @@ namespace ProRa
 {
     class Group
     {
+        static int Count;
+        int id;
         string Name;
 	    int Size;
         public int[,] week = new int[5, 12];
 
+        public int Id
+        {
+            get { return id; }
+        }
+
         public Group(string N, int S)
         {
+            id = Count;
+            Count++;
             Name = N;
             Size = S;
 
