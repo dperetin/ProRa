@@ -12,12 +12,10 @@ namespace ProRa
     public partial class Form1 : Form
     {
         Schedule podaci = new Schedule();
-//        Schedule best = new Schedule();
         Raspored best;
 
         public Form1()
         {
-            
             InitializeComponent();
         }
 
@@ -34,8 +32,11 @@ namespace ProRa
                 button3.Enabled = true;
                 foreach (Course k in podaci.CourseList)
                 {
-                    string[] row = { k.getIsvu(), k.needsProjector().ToString(), k.getClassroomType().ToString(), k.getName() };
-                    //row.
+                    string[] row = { k.getIsvu(), 
+                                     k.needsProjector().ToString(), 
+                                     k.getClassroomType().ToString(), 
+                                     k.getName() };
+                    
                     dataGridView1.Rows.Add(row);
                 }
             }
@@ -68,8 +69,11 @@ namespace ProRa
                 button5.Enabled = true;
                 foreach (Classroom k in podaci.ClassroomList)
                 {
-                    string[] row = { k.getID(), k.getCapacity().ToString(), k.getProjector().ToString() , k.getType().ToString() };
-                    //row.
+                    string[] row = { k.getID(), 
+                                     k.getCapacity().ToString(), 
+                                     k.getProjector().ToString(), 
+                                     k.getType().ToString() };
+                    
                     dataGridView2.Rows.Add(row);
                 }
             }
@@ -87,12 +91,7 @@ namespace ProRa
         private void button6_Click(object sender, EventArgs e)
         {
             best = podaci.timetabler();
-      //      r.generateHtml("dejan.html", podaci);
-          
-        //    best = podaci.deepCopy();
             button7.Enabled = true;
-         
-
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -112,62 +111,62 @@ namespace ProRa
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-           /* best.view = 1;
+            best.view = 1;
             comboBox1.Items.Clear();
             comboBox1.BeginUpdate();
-            foreach (Group g in best.GroupList)
+            foreach (Group g in podaci.GroupList)
             {
                 comboBox1.Items.Add(g.getName());
             }
-            comboBox1.EndUpdate();*/
+            comboBox1.EndUpdate();
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-        /*    best.view = 2;
+            best.view = 2;
             comboBox1.Items.Clear();
             comboBox1.BeginUpdate();
-            foreach (Lecturer g in best.LecturerList)
+            foreach (Lecturer g in podaci.LecturerList)
             {
                 comboBox1.Items.Add(g.getName());
             }
-            comboBox1.EndUpdate();*/
+            comboBox1.EndUpdate();
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-           /* best.view = 3;
+            best.view = 3;
             comboBox1.Items.Clear();
             comboBox1.BeginUpdate();
-            foreach (Classroom g in best.ClassroomList)
+            foreach (Classroom g in podaci.ClassroomList)
             {
                 comboBox1.Items.Add(g.getID());
             }
-            comboBox1.EndUpdate();*/
+            comboBox1.EndUpdate();
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-          /*  if (best.view == 1)
+            if (best.view == 1)
             {
                 Object selectedItem = comboBox1.SelectedItem;
-                string html = best.drawGroupSchedule(best.findGroup(selectedItem.ToString()));
+                Group g = podaci.findGroup(selectedItem.ToString());
+                string html = best.drawGroupSchedule(g.Id, podaci);
                 webBrowser1.DocumentText = html;
             }
             if (best.view == 2)
             {
-                //Object selectedItem = comboBox1.SelectedItem;
                 int selectedIndex = comboBox1.SelectedIndex;
-                string html = best.drawLecturerSchedule(best.findLecturer(selectedIndex));
+                string html = best.drawLecturerSchedule(selectedIndex, podaci);
                 webBrowser1.DocumentText = html;
             }
             if (best.view == 3)
             {
                 Object selectedItem = comboBox1.SelectedItem;
-                //int selectedIndex = comboBox1.SelectedIndex;
-                string html = best.drawClassroomSchedule(best.getRoomByID(selectedItem.ToString()));
+                Classroom c = podaci.getRoomByID(selectedItem.ToString());
+                string html = best.drawClassroomSchedule(c.Id, podaci);
                 webBrowser1.DocumentText = html;
-            }*/
+            }
             
         }
 
@@ -176,10 +175,7 @@ namespace ProRa
             progressBar1.Minimum = 0;
             progressBar1.Maximum = 500;
             progressBar1.Step = 1;
-            
-          
-            backgroundWorker1.RunWorkerAsync();
-            
+            backgroundWorker1.RunWorkerAsync();   
         }
       
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
@@ -278,7 +274,7 @@ namespace ProRa
                                         if (eval.Score >= best.Score)
                                         {
                                             best = new Raspored(eval);
-                                            //label1.Text = best.Score.ToString();
+                                            label1.Text = best.Score.ToString();
                                             //string html = best.drawGroupSchedule(best.findGroup("MA1_1"));
                                             //webBrowser1.DocumentText = html;
                                             //Console.WriteLine("{0}", best.getScore());

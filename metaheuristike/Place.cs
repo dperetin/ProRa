@@ -31,6 +31,7 @@ namespace ProRa
         int[, ,] grupe;
         int[,] eventi;
         double score;
+        public int view;
 
         public Raspored(Raspored r)
         {
@@ -40,6 +41,7 @@ namespace ProRa
             grupe = (int[, ,])r.grupe.Clone();
             eventi = (int[, ])r.eventi.Clone();
             score = r.score;
+            view = r.view;
         }
 
         public double Score
@@ -55,6 +57,7 @@ namespace ProRa
             grupe = new int[podaci.GroupList.Count, 5, 12];
             eventi = new int[podaci.EventList.Count + 1, 4];
             score = 0;
+            view = 0;
         }
 
         public bool IsRoomAvailable(int roomId, int i, int j, int t)
@@ -339,6 +342,113 @@ namespace ProRa
             {
                 profesori[l, i, j + k] = EventId;
             }
+        }
+        public string drawGroupSchedule(int g, Schedule p)
+        {
+            Group G = p.GetGroupById(g);
+            string s = "<html><head><style type='text/css'>body{margin:50px 0px; padding:0px;	text-align:center;}table, td, th{	border: 1px solid black;	border-collapse:collapse;}td{font-size:10pt; text-align:center;} td.full{background-color=#CCCCFF}</style></head><body><h3>";
+            s += (G.getName() + "</h3><table border='2'>");
+            s += "<tr><th WIDTH='70'>SAT</th><th WIDTH='150'>PONEDJELJAK</th><th WIDTH='150'>UTORAK</th><th WIDTH='150'>SRIJEDA</th><th WIDTH='150'>CETVRTAK</th><th WIDTH='150'>PETAK</th></tr>";
+            for (int i = 0; i < 12; i++)
+            {
+                s += ("<tr style='height:40px'><td WIDTH='70'>" + (i + 8).ToString() + "<sup>00</sup> - " + (i + 9).ToString() + "<sup>00</sup></td>");
+                for (int j = 0; j < 5; j++)
+                {
+                    if (grupe[g, j, i] == 0)
+                        s += "<td WIDTH='150'>&nbsp;</td>";
+                    else
+                    {
+                        string tip;
+
+
+                        Event t = p.getEventByID(grupe[g, j, i]);
+                        if (t.getLType() == 1) tip = "(p)";
+                        else tip = "(v)";
+                        if (i == 0 || grupe[g, j, i - 1] != grupe[g, j, i])
+                        {
+                            s += ("<td class='full' rowspan='" + t.getDuration().ToString() + "' WIDTH='150'>" + t.getCourse().getName() + " " + tip + "<br />" + eventi[t.Id, 1]/*t.getClassroom().getID()*/ + "  " + p.findLecturer(eventi[t.Id, 0]).getName()/*t.getLecturer().getName()*/ + "</td>");
+                        }
+
+                    }
+
+                }
+                s += "</tr>";
+            }
+
+            s += "</table></body></html>";
+            return s;
+        }
+
+        public string drawLecturerSchedule(int g, Schedule p)
+        {
+            Lecturer G = p.findLecturer(g);
+            string s = "<html><head><style type='text/css'>body{margin:50px 0px; padding:0px;	text-align:center;}table, td, th{	border: 1px solid black;	border-collapse:collapse;}td{font-size:10pt; text-align:center;} td.full{background-color=#CCCCFF}</style></head><body><h3>";
+            s += (G.getName() + "</h3><table border='2'>");
+            s += "<tr><th WIDTH='70'>SAT</th><th WIDTH='150'>PONEDJELJAK</th><th WIDTH='150'>UTORAK</th><th WIDTH='150'>SRIJEDA</th><th WIDTH='150'>CETVRTAK</th><th WIDTH='150'>PETAK</th></tr>";
+            for (int i = 0; i < 12; i++)
+            {
+                s += ("<tr style='height:40px'><td WIDTH='70'>" + (i + 8).ToString() + "<sup>00</sup> - " + (i + 9).ToString() + "<sup>00</sup></td>");
+                for (int j = 0; j < 5; j++)
+                {
+                    if (profesori[g, j, i] == 0)
+                        s += "<td WIDTH='150'>&nbsp;</td>";
+                    else
+                    {
+                        Event t = p.getEventByID(profesori[g, j, i]);
+                        if (i == 0 || profesori[g, j, i - 1] != profesori[g, j, i])
+                        {
+                            s += ("<td class='full' rowspan='" + t.getDuration().ToString() + "' WIDTH='150'>" + t.getCourse().getName() + "<br /> " + eventi[t.Id, 1]/*t.getClassroom().getID()*/ + "</td>");
+                        }
+
+                    }
+
+                }
+                s += "</tr>";
+            }
+
+            s += "</table></body></html>";
+            return s;
+        }
+        public string drawClassroomSchedule(int g, Schedule p)
+        {
+            Classroom G = p.getRoomByNo(g);
+            string s = "<html><head><style type='text/css'>" + 
+                       "body{margin:50px 0px; padding:0px;	text-align:center;}" + 
+                       "table, td, th{	border: 1px solid black;	border-collapse:collapse;}" + 
+                       "td{font-size:10pt; text-align:center;}" + 
+                       " td.full{background-color=#CCCCFF}</style></head><body><h3>";
+            s += (G.getID() + "</h3><table border='2'>");
+            s += "<tr><th WIDTH='70'>SAT</th><th WIDTH='150'>PONEDJELJAK</th>" + 
+                 "<th WIDTH='150'>UTORAK</th><th WIDTH='150'>SRIJEDA</th>" + 
+                 "<th WIDTH='150'>CETVRTAK</th><th WIDTH='150'>PETAK</th></tr>";
+
+            for (int i = 0; i < 12; i++)
+            {
+                s += ("<tr style='height:40px'><td WIDTH='70'>" + 
+                     (i + 8).ToString() + "<sup>00</sup> - " + 
+                     (i + 9).ToString() + "<sup>00</sup></td>");
+
+                for (int j = 0; j < 5; j++)
+                {
+                    if (sobe[g, j, i] == 0)
+                        s += "<td WIDTH='150'>&nbsp;</td>";
+                    else
+                    {
+                        Event t = p.getEventByID(sobe[g, j, i]);
+                        if (i == 0 || sobe[g, j, i - 1] != sobe[g, j, i])
+                        {
+                            s += ("<td  class='full'rowspan='" + 
+                                 t.getDuration().ToString() + "' WIDTH='150'>" + 
+                                 t.getCourse().getName() + " " + "<br />" + 
+                                 p.findLecturer(eventi[t.Id, 0]).getName()/*t.getLecturer().getName()*/ + 
+                                 "</td>");
+                        }
+                    }
+                }
+                s += "</tr>";
+            }
+            s += "</table></body></html>";
+            return s;
         }
     }
 }

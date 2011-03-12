@@ -683,7 +683,14 @@ namespace ProRa
 			        return it;
 	        return null;
         }
+        public Classroom getRoomByNo(int ID)
+        {
+            foreach (Classroom it in ClassroomList)
 
+                if (it.Id == ID)
+                    return it;
+            return null;
+        }
         public void generateHtml(string s)
         {
 	         TextWriter f = new StreamWriter(s);
