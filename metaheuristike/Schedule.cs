@@ -731,7 +731,7 @@ namespace ProRa
 	        f.Close();
         }
 
-        public int[] evaluateSchedule()
+       /* public int[] evaluateSchedule()
         {
 	        score = 0;
 	        double suma = 0;
@@ -789,7 +789,7 @@ namespace ProRa
                     }
                 }
             }*/
-            foreach (Course c in CourseList)
+           /* foreach (Course c in CourseList)
             {
                 foreach(Course k in CourseList)
                 {
@@ -812,7 +812,7 @@ namespace ProRa
 
 
             	
-        }
+        }*/
         public string drawGroupSchedule(Group G)
         {
 			string s = "<html><head><style type='text/css'>body{margin:50px 0px; padding:0px;	text-align:center;}table, td, th{	border: 1px solid black;	border-collapse:collapse;}td{font-size:10pt; text-align:center;} td.full{background-color=#CCCCFF}</style></head><body><h3>";

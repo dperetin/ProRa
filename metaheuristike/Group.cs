@@ -91,14 +91,7 @@ namespace ProRa
                     load++;
             return load;
         }
-        public int dayLoad(int day)
-        {
-            int load = 0;
-            for (int i = 0; i < 12; i++)
-                if (week[day, i] != 0)
-                    load++;
-            return load;
-        }
+        
         public int prijeDeset(int day)
         {
             int load = 0;

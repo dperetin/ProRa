@@ -14,7 +14,12 @@ namespace ProRa
 	    int Duration;
         public int tabu = 0;
 	    Classroom C;
-	   
+
+        public int Id
+        {
+            get { return eventID; }
+        }
+
 	    int score;
 	    int L_type;
 	    int C_type = 0;

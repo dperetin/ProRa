@@ -12,7 +12,8 @@ namespace ProRa
     public partial class Form1 : Form
     {
         Schedule podaci = new Schedule();
-        Schedule best = new Schedule();
+//        Schedule best = new Schedule();
+        Raspored best;
 
         public Form1()
         {
@@ -85,12 +86,12 @@ namespace ProRa
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Raspored r = podaci.timetabler();
-            r.generateHtml("dejan.html", podaci);
+            best = podaci.timetabler();
+      //      r.generateHtml("dejan.html", podaci);
           
-      /*      best = podaci.deepCopy();
+        //    best = podaci.deepCopy();
             button7.Enabled = true;
-       */     
+         
 
         }
 
@@ -111,43 +112,43 @@ namespace ProRa
 
         private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            best.view = 1;
+           /* best.view = 1;
             comboBox1.Items.Clear();
             comboBox1.BeginUpdate();
             foreach (Group g in best.GroupList)
             {
                 comboBox1.Items.Add(g.getName());
             }
-            comboBox1.EndUpdate();
+            comboBox1.EndUpdate();*/
         }
 
         private void radioButton2_CheckedChanged(object sender, EventArgs e)
         {
-            best.view = 2;
+        /*    best.view = 2;
             comboBox1.Items.Clear();
             comboBox1.BeginUpdate();
             foreach (Lecturer g in best.LecturerList)
             {
                 comboBox1.Items.Add(g.getName());
             }
-            comboBox1.EndUpdate();
+            comboBox1.EndUpdate();*/
         }
 
         private void radioButton3_CheckedChanged(object sender, EventArgs e)
         {
-            best.view = 3;
+           /* best.view = 3;
             comboBox1.Items.Clear();
             comboBox1.BeginUpdate();
             foreach (Classroom g in best.ClassroomList)
             {
                 comboBox1.Items.Add(g.getID());
             }
-            comboBox1.EndUpdate();
+            comboBox1.EndUpdate();*/
         }
 
         private void button8_Click(object sender, EventArgs e)
         {
-            if (best.view == 1)
+          /*  if (best.view == 1)
             {
                 Object selectedItem = comboBox1.SelectedItem;
                 string html = best.drawGroupSchedule(best.findGroup(selectedItem.ToString()));
@@ -166,7 +167,7 @@ namespace ProRa
                 //int selectedIndex = comboBox1.SelectedIndex;
                 string html = best.drawClassroomSchedule(best.getRoomByID(selectedItem.ToString()));
                 webBrowser1.DocumentText = html;
-            }
+            }*/
             
         }
 
@@ -184,16 +185,18 @@ namespace ProRa
         private void backgroundWorker1_DoWork(object sender, DoWorkEventArgs e)
         {
             //label1.Text = "Dejan";
-   /*         Schedule temp = new Schedule();
-            temp = podaci.deepCopy();
+            Raspored temp = new Raspored(best);
+            best.RemoveEvent(podaci, 4);
+            temp.evaluateSchedule(podaci);
+            //temp = podaci.deepCopy();
             
             int[] bad0 = new int[7];
-            bad0 = temp.evaluateSchedule();
-            label3.Text = bad0[0].ToString();
+            bad0 = temp.evaluateSchedule(podaci);
+            /*label3.Text = bad0[0].ToString();
             label4.Text = bad0[3].ToString();
-            label5.Text = bad0[4].ToString();
-            //temp.generateHtml("temp.html");
-            best = temp.deepCopy();
+            label5.Text = bad0[4].ToString();*/
+            temp.generateHtml("temp.html", podaci);
+            //best = temp.deepCopy();
             //Console.WriteLine("{0}", temp.getScore());
             
             int korak = 0;
@@ -212,47 +215,55 @@ namespace ProRa
                 //label2.Text = br.ToString();
                 br++;
                 //Console.WriteLine("===============");
-                Schedule eval = temp.deepCopy();
-                Schedule localBest = podaci.deepCopy();
-                localBest.evaluateSchedule();
-                foreach (Event f in temp.EventList)
+                Raspored eval = new Raspored(temp);//temp.deepCopy();
+          //      Schedule localBest = podaci.deepCopy();
+          //      localBest.evaluateSchedule();
+                foreach (Event f in podaci.EventList)
                 {
+                    int eventId = f.Id;
+                    int LecId = f.getLecturer().Id;
                     //if (f.tabu != 0 && korak - f.tabu < 70) continue; 
                     int t = f.getDuration();
-                    foreach (Classroom c in temp.ClassroomList)
+                    foreach (Classroom c in podaci.ClassroomList)
                     {
+                        //int Roo
                         if (c.canHost(f))
                         {
                             for (int i = 0; i < 5; i++)
                             {
                                 for (int j = 0; j < 12; j++)
                                 {
+                                    
 
-
-                                    if (c.isAvailable(i, j, t) && f.getLecturer().isAvailable(i, j, t))
+                                    //if (c.isAvailable(i, j, t) && f.getLecturer().isAvailable(i, j, t))
+                                    if (eval.IsRoomAvailable(c.Id, i, j, t) && eval.IsLecturerAvailable(LecId, i, j, t))
                                     {
                                         bool indikator = false;
                                         foreach (string g in f.getGroups())
                                         {
-                                            if (eval.findGroup(g).isAvailable(i, j, t) == false)
+
+                                            if (eval.IsGroupAvailable(podaci.findGroup(g).Id, i, j, t) == false)
                                                 indikator = true;
                                         }
                                         if (indikator)
                                             continue;
 
                                         //TU SMO DAKLE, na eval radim remove
-                                        //e.getClassroom().removeEvent(e.getID());
-                                        eval.getEventByID(f.getID()).getClassroom().removeEvent(f.getID());
-                                        eval.getEventByID(f.getID()).getLecturer().removeEvent(f.getID());
-                                        eval.getEventByID(f.getID()).getCourse().removeEvent(f.getPlace().i, f.getPlace().j, f.getDuration());
-                                        foreach (string g in f.getGroups())
-                                        {
-                                            eval.findGroup(g).removeEvent(f.getID());
-                                        }
-                                        //Place p = new Place(eval.getEventByID(e.getID()).getClassroom(), i, j);
-                                        Place p = new Place(eval.getRoomByID(c.getID()), i, j);
+                                        
+                                        //eval.getEventByID(f.getID()).getClassroom().removeEvent(f.getID());
+                                        //eval.getEventByID(f.getID()).getLecturer().removeEvent(f.getID());
+                                        //eval.getEventByID(f.getID()).getCourse().removeEvent(f.getPlace().i, f.getPlace().j, f.getDuration());
+
+                                        //foreach (string g in f.getGroups())
+                                        //{
+                                        //    eval.findGroup(g).removeEvent(f.getID());
+                                        //}
+                                        
+                                        eval.RemoveEvent(podaci, eventId);
+
+                                       /* Place p = new Place(eval.getRoomByID(c.getID()), i, j);
                                         eval.getEventByID(f.getID()).setPlace(p);
-                                        //eval.getEventByID(e.getID()).getClassroom().setEvent(i, j, e);
+                                        
                                         eval.getRoomByID(c.getID()).setEvent(i, j, f);
                                         eval.getEventByID(f.getID()).getLecturer().setEvent(i, j, f);
                                         eval.getEventByID(f.getID()).getCourse().setEvent(i, j, f);
@@ -261,24 +272,27 @@ namespace ProRa
                                         {
                                             eval.findGroup(g).setEvent(i, j, f);
                                         }
-                                        eval.evaluateSchedule();
-                                        if (eval.getScore() > best.getScore())
+                                        */
+                                        eval.SetEvent(podaci, eventId, c.Id, i, j);
+                                        eval.evaluateSchedule(podaci);
+                                        if (eval.Score >= best.Score)
                                         {
-                                            best = eval.deepCopy();
-                                            label1.Text = best.getScore().ToString();
+                                            best = new Raspored(eval);
+                                            //label1.Text = best.Score.ToString();
                                             //string html = best.drawGroupSchedule(best.findGroup("MA1_1"));
                                             //webBrowser1.DocumentText = html;
                                             //Console.WriteLine("{0}", best.getScore());
                                             //best.generateHtml("best.html");
                                             promjenjeniEvent = f.getID();
                                             stuck = false;
+                                            temp.generateHtml("stuck.html", podaci);
                                         }
-                                        if (eval.getScore() > localBest.getScore())
+                                  /*      if (eval.getScore() > localBest.getScore())
                                         {
                                             localBest = eval.deepCopy();
                                            
-                                        }
-                                        eval = temp.deepCopy();
+                                        }*/
+                                        eval = new Raspored(temp);
                                     }
                                 }
                             }
@@ -291,25 +305,26 @@ namespace ProRa
                     //best = localBest.deepCopy();
                     //label1.ForeColor = Color.Red;
                     foo = true;
-					label2.Text = br.ToString();
+					//label2.Text = br.ToString();
                     int[] bad = new int[7];
-                    bad = best.evaluateSchedule();
-                    label10.Text = bad[0].ToString();
-                    label11.Text = bad[3].ToString();
-                    label12.Text = bad[4].ToString();
+                    bad = best.evaluateSchedule(podaci);
+                    //label10.Text = bad[0].ToString();
+                    //label11.Text = bad[3].ToString();
+                    //label12.Text = bad[4].ToString();
+                    temp.generateHtml("stuck.html", podaci);
                 }
-                temp = best.deepCopy();
-                temp.getEventByID(promjenjeniEvent).tabu = korak;
+                temp = new Raspored(best);
+                //temp.getEventByID(promjenjeniEvent).tabu = korak;
                 //label2.Text = promjenjeniEvent.ToString();
                 
-            }*/
+            }
             //label2.Text = "ERROR" + br.ToString();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
             //string sadrzajDatoteke = podaci.generateHtml();
-            saveFileDialog1.Title = "Spremi datoteku.";
+         /*   saveFileDialog1.Title = "Spremi datoteku.";
             string temp = "raspored.html";
             
             saveFileDialog1.FileName = temp;
@@ -318,7 +333,7 @@ namespace ProRa
             {
                 //TextWriter f = new StreamWriter(saveFileDialog1.FileName);
                 best.generateHtml(saveFileDialog1.FileName);
-            }
+            }*/
         }
 
         private void button10_Click(object sender, EventArgs e)
