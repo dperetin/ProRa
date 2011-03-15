@@ -163,7 +163,7 @@ namespace ProRa
                             if (i == 0 || grupe[id, j, i - 1] != grupe[id, j, i])
                             {
                                 //f << "<td rowspan='" << t->getDuration() << "' WIDTH='150'>" << t->getCourse()->getName() << "  "  << t->soba  << "  "  << t->getLecturer() << "</td>" << endl;
-                                f.WriteLine("<td rowspan='{0}' WIDTH='150'>{1} {2} <br /> {3}  {4}</td>", t.getDuration(), t.getCourse().getName(), tip, eventi[t.getID(), 1], r.findLecturer(eventi[t.getID(), 0]).getName());
+                                f.WriteLine("<td rowspan='{0}' WIDTH='150'>{1} {2} <br /> {3}  {4}</td>", t.Duration, t.getCourse().getName(), tip, eventi[t.getID(), 1], r.findLecturer(eventi[t.getID(), 0]).getName());
                             }
                         }
                     }
@@ -292,7 +292,7 @@ namespace ProRa
         public void RemoveEvent(Schedule s, int EventId)
         {
             Event e = s.getEventByID(EventId);
-            int t = e.getDuration();
+            int t = e.Duration;
             int i = eventi[EventId, 2]; 
             int j = eventi[EventId, 3];
             int c = eventi[EventId, 1];
@@ -320,7 +320,7 @@ namespace ProRa
         public void SetEvent(Schedule s, int EventId, int classroomId, int i, int j)
         {
             Event e = s.getEventByID(EventId);
-            int t = e.getDuration();
+            int t = e.Duration;
             eventi[EventId, 2] = i;
             eventi[EventId, 3] = j;
             eventi[EventId, 1] = classroomId;
@@ -366,7 +366,7 @@ namespace ProRa
                         else tip = "(v)";
                         if (i == 0 || grupe[g, j, i - 1] != grupe[g, j, i])
                         {
-                            s += ("<td class='full' rowspan='" + t.getDuration().ToString() + "' WIDTH='150'>" + t.getCourse().getName() + " " + tip + "<br />" + eventi[t.Id, 1]/*t.getClassroom().getID()*/ + "  " + p.findLecturer(eventi[t.Id, 0]).getName()/*t.getLecturer().getName()*/ + "</td>");
+                            s += ("<td class='full' rowspan='" + t.Duration.ToString() + "' WIDTH='150'>" + t.getCourse().getName() + " " + tip + "<br />" + eventi[t.Id, 1]/*t.getClassroom().getID()*/ + "  " + p.findLecturer(eventi[t.Id, 0]).getName()/*t.getLecturer().getName()*/ + "</td>");
                         }
 
                     }
@@ -397,7 +397,7 @@ namespace ProRa
                         Event t = p.getEventByID(profesori[g, j, i]);
                         if (i == 0 || profesori[g, j, i - 1] != profesori[g, j, i])
                         {
-                            s += ("<td class='full' rowspan='" + t.getDuration().ToString() + "' WIDTH='150'>" + t.getCourse().getName() + "<br /> " + eventi[t.Id, 1]/*t.getClassroom().getID()*/ + "</td>");
+                            s += ("<td class='full' rowspan='" + t.Duration.ToString() + "' WIDTH='150'>" + t.getCourse().getName() + "<br /> " + eventi[t.Id, 1]/*t.getClassroom().getID()*/ + "</td>");
                         }
 
                     }
@@ -438,7 +438,7 @@ namespace ProRa
                         if (i == 0 || sobe[g, j, i - 1] != sobe[g, j, i])
                         {
                             s += ("<td  class='full'rowspan='" + 
-                                 t.getDuration().ToString() + "' WIDTH='150'>" + 
+                                 t.Duration.ToString() + "' WIDTH='150'>" + 
                                  t.getCourse().getName() + " " + "<br />" + 
                                  p.findLecturer(eventi[t.Id, 0]).getName()/*t.getLecturer().getName()*/ + 
                                  "</td>");

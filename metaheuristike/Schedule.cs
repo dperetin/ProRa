@@ -197,9 +197,9 @@ namespace ProRa
             {
                 foreach (Event it in UnasignedEvents)
                 {
-                    int studentNo = it.getStudentNumber();
+                    int studentNo = it.StudentNumber;
                     Course kolegij = it.getCourse();
-                    int t = it.getDuration();
+                    int t = it.Duration;
 
                     int score = 0;
 
@@ -310,7 +310,7 @@ namespace ProRa
                 List<Classroom> predavaone = new List<Classroom>();
                 foreach (Classroom j in ClassroomList)
                 {
-                    if(j.getCapacity() >= minEvent.getStudentNumber() && j.getProjector() >= k.needsProjector() && j.getType() == k.getClassroomType())
+                    if(j.getCapacity() >= minEvent.StudentNumber && j.getProjector() >= k.needsProjector() && j.getType() == k.getClassroomType())
                     {
                         predavaone.Add(j);
                     }
@@ -324,14 +324,14 @@ namespace ProRa
                     {
                         for (int j = 0; j < 12; j++)
                         {
-                            if (ra.IsRoomAvailable(tt.Id, i, j, minEvent.getDuration()) == false)
+                            if (ra.IsRoomAvailable(tt.Id, i, j, minEvent.Duration) == false)
                                 continue;
-                            if (ra.IsLecturerAvailable(profesor.Id, i, j, minEvent.getDuration()) == false)
+                            if (ra.IsLecturerAvailable(profesor.Id, i, j, minEvent.Duration) == false)
                                 continue;
                             int free = 0;
                             foreach (string g in minEvent.getGroups())
                             {
-                                if (ra.IsGroupAvailable(findGroup(g).Id, i, j, minEvent.getDuration()) == false)
+                                if (ra.IsGroupAvailable(findGroup(g).Id, i, j, minEvent.Duration) == false)
                                 {
                                     free++;
                                 }
@@ -348,7 +348,7 @@ namespace ProRa
 						    //Group *g = findGroup(it->getGroupName());
 						    
 						        Course c = it.getCourse();
-						        if (tt.getCapacity() >= it.getStudentNumber() && c.getClassroomType() == tt.getType() && c.needsProjector() == tt.getProjector() )
+						        if (tt.getCapacity() >= it.StudentNumber && c.getClassroomType() == tt.getType() && c.needsProjector() == tt.getProjector() )
 							        q1++;
 					        }
 					        tmp.q[0] = q1;
@@ -357,13 +357,13 @@ namespace ProRa
 					
 					        foreach (Classroom ci in predavaone) 
                             {
-                                if (ra.IsRoomAvailable(ci.Id, i, j, minEvent.getDuration()) == false)
+                                if (ra.IsRoomAvailable(ci.Id, i, j, minEvent.Duration) == false)
                                     q2++;
 					        }
 					        tmp.q[1] = q2;
 
                             int q3 = 0;
-                            if (tmp.j + minEvent.getDuration() >= 10)
+                            if (tmp.j + minEvent.Duration >= 10)
                                 q3 = 1;
                             tmp.q[2] = q3;
 
@@ -419,14 +419,14 @@ namespace ProRa
                 Classroom b = getRoomByID(minPlace.soba.getID());
 
                // b.setEvent(minPlace.i, minPlace.j, minEvent);
-                ra.SetClassroomEvent(b.Id, minPlace.i, minPlace.j, minEvent.getDuration(), minEvent.getID());
+                ra.SetClassroomEvent(b.Id, minPlace.i, minPlace.j, minEvent.Duration, minEvent.getID());
                // profesor.setEvent(minPlace.i, minPlace.j, minEvent);
-                ra.SetLecturerEvent(profesor.Id, minPlace.i, minPlace.j, minEvent.getDuration(), minEvent.getID());
+                ra.SetLecturerEvent(profesor.Id, minPlace.i, minPlace.j, minEvent.Duration, minEvent.getID());
                 profesor.incLoad();
                 foreach (string g in minEvent.getGroups())
                 {
                     //findGroup(g).setEvent(minPlace.i, minPlace.j, minEvent);
-                    ra.SetGroupEvent(findGroup(g).Id, minPlace.i, minPlace.j, minEvent.getDuration(), minEvent.getID());
+                    ra.SetGroupEvent(findGroup(g).Id, minPlace.i, minPlace.j, minEvent.Duration, minEvent.getID());
                 }
                 UnasignedEvents.Remove(minEvent);
 

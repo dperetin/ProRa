@@ -11,9 +11,14 @@ namespace ProRa
 	    int eventID;
 	    Course kolegij;
 	    List<string> grupe;
-	    int Duration;
+	    int duration;
         public int tabu = 0;
 	    Classroom C;
+
+        public int Duration
+        {
+            get { return duration; }
+        }
 
         public int Id
         {
@@ -24,12 +29,17 @@ namespace ProRa
 	    int L_type;
 	    int C_type = 0;
 	    int studentNumber;
+
+        public int StudentNumber
+        {
+            get { return studentNumber;}
+        }
 	    Lecturer Lec;
         public Event(Course K, List<string> G, int Trajanje, int id, int L, int C, int sNo)
         {
             kolegij = K;
             grupe = G;
-            Duration = Trajanje;
+            duration = Trajanje;
             eventID = id;
             L_type = L;
             C_type = C;
@@ -37,10 +47,10 @@ namespace ProRa
         }
         public void setPlace(Place p) { termin = p; }
         public Place getPlace() { return termin; }
-        public int getStudentNumber(){return studentNumber;}
+        //public int getStudentNumber(){return studentNumber;}
         public Course getCourse (){return kolegij;}
         public int getCType(){return C_type;}
-        public int getDuration(){return Duration;}
+        //public int getDuration(){return Duration;}
         public void setScore(int n){score = n;}
         public int getScore(){return score;}
         public int getLType(){return L_type;}

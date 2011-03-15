@@ -173,7 +173,7 @@ namespace ProRa
         private void button9_Click(object sender, EventArgs e)
         {
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = 500;
+            progressBar1.Maximum = 50;
             progressBar1.Step = 1;
             backgroundWorker1.RunWorkerAsync();   
         }
@@ -199,7 +199,7 @@ namespace ProRa
             int br = 0;
             int promjenjeniEvent = 0;
             bool foo = false;
-            while (br < 500)
+            while (br < 50)
             {
                 label2.Text = br.ToString();
                 progressBar1.PerformStep();
@@ -219,7 +219,7 @@ namespace ProRa
                     int eventId = f.Id;
                     int LecId = f.getLecturer().Id;
                     //if (f.tabu != 0 && korak - f.tabu < 70) continue; 
-                    int t = f.getDuration();
+                    int t = f.Duration;
                     foreach (Classroom c in podaci.ClassroomList)
                     {
                         //int Roo

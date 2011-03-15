@@ -51,7 +51,7 @@ namespace ProRa
         }
         public void setEvent(int i, int j, Event e)
         {
-            for (int k = 0; k < e.getDuration(); k++)
+            for (int k = 0; k < e.Duration; k++)
                 week[i, j + k]++;
         }
         public void removeEvent(int i, int j, int t)

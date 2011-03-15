@@ -34,7 +34,7 @@ namespace ProRa
                     week[i, j] = 0;
         }
         public bool canHost(Event e) {
-		    if (e.getStudentNumber() <= Capacity && e.getCType() == Type /*&& e.getCourse().needsProjector() <= Projector*/)
+		    if (e.StudentNumber <= Capacity && e.getCType() == Type /*&& e.getCourse().needsProjector() <= Projector*/)
 			    return true;
 		    return false;
 		
@@ -55,7 +55,7 @@ namespace ProRa
         public int getType() { return Type; }
         public string getID() { return ID; }
         public void setEvent(int i, int j, Event e){
-		    for (int k = 0; k < e.getDuration(); k++)
+		    for (int k = 0; k < e.Duration; k++)
 			    week[i, j + k] = e.getID();
 	    }
         public void removeEvent(int eventID){
