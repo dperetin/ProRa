@@ -39,17 +39,7 @@ namespace ProRa
 		    return false;
 		
 	    }
-  /*      public bool isAvailable(int i, int j, int t) {
-		    int status = 0;
-            if (t + j > 12)
-                return false;
-		    for (int k = 0; k < t; k++)
-			    status += week[i, j + k];
-		    if (status == 0)
-			    return true;
-		    else
-			    return false;
-	    }*/
+ 
         public int getCapacity(){return Capacity;}
         public int getProjector() { return Projector; }
         public int getType() { return Type; }

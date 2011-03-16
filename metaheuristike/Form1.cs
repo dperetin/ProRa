@@ -173,7 +173,7 @@ namespace ProRa
         private void button9_Click(object sender, EventArgs e)
         {
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = 50;
+            progressBar1.Maximum = 500;
             progressBar1.Step = 1;
             backgroundWorker1.RunWorkerAsync();   
         }
@@ -188,9 +188,9 @@ namespace ProRa
             
             int[] bad0 = new int[7];
             bad0 = temp.evaluateSchedule(podaci);
-            /*label3.Text = bad0[0].ToString();
+            label3.Text = bad0[0].ToString();
             label4.Text = bad0[3].ToString();
-            label5.Text = bad0[4].ToString();*/
+            label5.Text = bad0[4].ToString();
             temp.generateHtml("temp.html", podaci);
             //best = temp.deepCopy();
             //Console.WriteLine("{0}", temp.getScore());
@@ -199,7 +199,7 @@ namespace ProRa
             int br = 0;
             int promjenjeniEvent = 0;
             bool foo = false;
-            while (br < 50)
+            while (br < 500)
             {
                 label2.Text = br.ToString();
                 progressBar1.PerformStep();
@@ -270,9 +270,12 @@ namespace ProRa
                                         }
                                         */
                                         eval.SetEvent(podaci, eventId, c.Id, i, j);
-                                        eval.evaluateSchedule(podaci);
+                                        bad0 = eval.evaluateSchedule(podaci);
                                         if (eval.Score >= best.Score)
                                         {
+                                            label10.Text = bad0[0].ToString();
+                                            label11.Text = bad0[3].ToString();
+                                            label12.Text = bad0[4].ToString();
                                             best = new Raspored(eval);
                                             label1.Text = best.Score.ToString();
                                             //string html = best.drawGroupSchedule(best.findGroup("MA1_1"));
@@ -294,7 +297,6 @@ namespace ProRa
                             }
                         }
                     }
-
                 }
                 if (stuck)
                 {
@@ -304,9 +306,9 @@ namespace ProRa
 					//label2.Text = br.ToString();
                     int[] bad = new int[7];
                     bad = best.evaluateSchedule(podaci);
-                    //label10.Text = bad[0].ToString();
-                    //label11.Text = bad[3].ToString();
-                    //label12.Text = bad[4].ToString();
+                    label10.Text = bad[0].ToString();
+                    label11.Text = bad[3].ToString();
+                    label12.Text = bad[4].ToString();
                     temp.generateHtml("stuck.html", podaci);
                 }
                 temp = new Raspored(best);

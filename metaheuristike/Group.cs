@@ -83,14 +83,7 @@ namespace ProRa
 		    rupe = (zadnji - prvi) - suma + 1;		
 		    return rupe;
 	    }
-        public int izaPet(int day)
-        {
-            int load = 0;
-            for (int i = 9; i < 12; i++)
-                if (week[day,i] != 0)
-                    load++;
-            return load;
-        }
+     
         
         public int prijeDeset(int day)
         {

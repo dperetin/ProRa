@@ -51,8 +51,8 @@ namespace ProRa
         public Course getCourse (){return kolegij;}
         public int getCType(){return C_type;}
         //public int getDuration(){return Duration;}
-        public void setScore(int n){score = n;}
-        public int getScore(){return score;}
+        //public void setScore(int n){score = n;}
+        //public int getScore(){return score;}
         public int getLType(){return L_type;}
         public int getID() { return eventID; }
         public void setLecturer(Lecturer l) { Lec = l; }
@@ -61,6 +61,12 @@ namespace ProRa
         public Lecturer getLecturer(){return Lec;}
 	
 	    public Classroom getClassroom(){return C;}
+
+        public int Score 
+        {
+            get { return score; }
+            set { score = value; }
+        }
 
     }
 }

@@ -179,7 +179,7 @@ namespace ProRa
         {
             score = 0;
             double suma = 0;
-            double[] w = { 10, 1, 1, 70, 10, 0, 1 };
+            double[] w = { 10, 1, 10, 70, 100, 0, 1 };
             int[] s = { 0, 0, 0, 0, 0, 0, 0 };
             //list<Group>::iterator it;
             //for (it = groupList.begin(); it != groupList.end(); it++) {
@@ -194,7 +194,7 @@ namespace ProRa
                     //else if (load < 3)
                     //s[0] += load;
                     //s[1] += it.prijeDeset(i);
-                    //s[2] += it.izaPet(i);
+                    s[2] += IzaPet(id, i);
                     s[3] += GroupBrojRupa(id, i);
                     //s[5] += it.praznoPrije(i);
                 }
@@ -235,18 +235,18 @@ namespace ProRa
                      }
                  }
              }*/
-   /*         foreach (Course c in CourseList)
+            foreach (Course c in r.CourseList)
             {
-                foreach (Course k in CourseList)
+                foreach (Course k in r.CourseList)
                 {
-                    if (matrica[c.getID(), k.getID()] == 0)
+                    if (r.matrica[c.getID(), k.getID()] == 0)
                     {
-                        s[4] += c.brojPreklapanja(k);
+       //                 s[4] += c.brojPreklapanja(k);
 
                     }
                 }
 
-            }*/
+            }
 
 
 
@@ -258,6 +258,14 @@ namespace ProRa
 
 
 
+        }
+        public int IzaPet(int id, int day)
+        {
+            int load = 0;
+            for (int i = 9; i < 12; i++)
+                if (grupe[id, day, i] != 0)
+                    load++;
+            return load;
         }
         public int GroupDayLoad(int id, int day)
         {
@@ -292,6 +300,7 @@ namespace ProRa
         public void RemoveEvent(Schedule s, int EventId)
         {
             Event e = s.getEventByID(EventId);
+            //e.getClassroom().week[]--;
             int t = e.Duration;
             int i = eventi[EventId, 2]; 
             int j = eventi[EventId, 3];
@@ -314,6 +323,9 @@ namespace ProRa
             {
                 profesori[l, i, j + k] = 0;
             }
+
+            e.getCourse().removeEvent(i, j, t);
+            
             eventi[EventId, 2] = 0;
             eventi[EventId, 3] = 0;
         }
@@ -342,6 +354,7 @@ namespace ProRa
             {
                 profesori[l, i, j + k] = EventId;
             }
+            e.getCourse().setEvent(i, j, e);
         }
         public string drawGroupSchedule(int g, Schedule p)
         {

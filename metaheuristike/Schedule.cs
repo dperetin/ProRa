@@ -224,7 +224,7 @@ namespace ProRa
                             }
 						      
                     }
-                    it.setScore(tmp_score);
+                    it.Score = tmp_score;
                 }
                 int min = 0;// = 100000;
                 Event minEvent = null;// = new Event();
@@ -241,12 +241,12 @@ namespace ProRa
                     }
                 }*/
                 //////////////////////
-                min = UnasignedEvents.First().getScore();
+                min = UnasignedEvents.First().Score;
                 foreach (Event it in UnasignedEvents)
                 {
-                    if (it.getScore() < min)
+                    if (it.Score < min)
                     {
-                        min = it.getScore();
+                        min = it.Score;
                         //minEvent = it;
                     }
                     
@@ -255,7 +255,7 @@ namespace ProRa
                 int brMin = 0;
                 foreach (Event it in UnasignedEvents)
                 {
-                    if (it.getScore() == min)
+                    if (it.Score == min)
                     {
                         brMin++;
                         minimalniEventi.Add(it);
@@ -310,7 +310,8 @@ namespace ProRa
                 List<Classroom> predavaone = new List<Classroom>();
                 foreach (Classroom j in ClassroomList)
                 {
-                    if(j.getCapacity() >= minEvent.StudentNumber && j.getProjector() >= k.needsProjector() && j.getType() == k.getClassroomType())
+                    //if(j.getCapacity() >= minEvent.StudentNumber && j.getProjector() >= k.needsProjector() && j.getType() == k.getClassroomType())
+                    if(j.canHost(minEvent))
                     {
                         predavaone.Add(j);
                     }
@@ -409,9 +410,9 @@ namespace ProRa
                 }
                 /////
                 int ID = minEvent.getID();
- /*               getEventByID(ID).setClassroom(getRoomByID(minPlace.soba.getID()));
-                getEventByID(ID).setPlace(minPlace);
-                getEventByID(ID).getCourse().setEvent(minPlace.i, minPlace.j, minEvent);*/
+                getEventByID(ID).setClassroom(getRoomByID(minPlace.soba.getID()));
+               /* getEventByID(ID).setPlace(minPlace);*/
+                getEventByID(ID).getCourse().setEvent(minPlace.i, minPlace.j, minEvent);
 
                 ra.SetClassroom(ID, minPlace.soba.Id);
 
