@@ -173,7 +173,7 @@ namespace ProRa
         private void button9_Click(object sender, EventArgs e)
         {
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = 500;
+            progressBar1.Maximum = 100;
             progressBar1.Step = 1;
             backgroundWorker1.RunWorkerAsync();   
         }
@@ -199,7 +199,7 @@ namespace ProRa
             int br = 0;
             int promjenjeniEvent = 0;
             bool foo = false;
-            while (br < 500)
+            while (br < 100)
             {
                 label2.Text = br.ToString();
                 progressBar1.PerformStep();

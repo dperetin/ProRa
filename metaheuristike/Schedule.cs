@@ -412,10 +412,10 @@ namespace ProRa
                 int ID = minEvent.getID();
                 getEventByID(ID).setClassroom(getRoomByID(minPlace.soba.getID()));
                /* getEventByID(ID).setPlace(minPlace);*/
-                getEventByID(ID).getCourse().setEvent(minPlace.i, minPlace.j, minEvent);
+                //getEventByID(ID).getCourse().setEvent(minPlace.i, minPlace.j, minEvent);
 
                 ra.SetClassroom(ID, minPlace.soba.Id);
-
+                ra.SetCourseEvent(minEvent.getCourse().getID(), minPlace.i, minPlace.j, minEvent.Duration, minEvent.getID());
 
                 Classroom b = getRoomByID(minPlace.soba.getID());
 

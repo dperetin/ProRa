@@ -29,6 +29,7 @@ namespace ProRa
         int[, ,] profesori;
         int[, ,] kolegiji;
         int[, ,] grupe;
+        //int[, ,] kolegiji;
         int[,] eventi;
         double score;
         public int view;
@@ -40,6 +41,7 @@ namespace ProRa
             kolegiji = (int[, ,])r.kolegiji.Clone();
             grupe = (int[, ,])r.grupe.Clone();
             eventi = (int[, ])r.eventi.Clone();
+            //kolegiji = (int[,])r.eventi.Clone();
             score = r.score;
             view = r.view;
         }
@@ -72,7 +74,20 @@ namespace ProRa
             else
                 return false;
         }
-
+        public int brojPreklapanja(Course k, Course c)
+        {
+            
+            int r = 0;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 12; j++)
+                {
+                    if (kolegiji[k.getID(), i, j] > 0 && kolegiji[k.getID(), i, j] > 0)
+                        r++;
+                }
+            }
+            return r;
+        }
         public bool IsLecturerAvailable(int lecId, int i, int j, int t)
         {
             int status = 0;
@@ -124,6 +139,12 @@ namespace ProRa
             for (int k = 0; k < t; k++)
                 grupe[GroupId, i, j + k] = EventId;
         }
+        public void SetCourseEvent(int CourseId, int i, int j, int t, int eventId)
+        {
+            for (int k = 0; k < t; k++)
+                kolegiji[CourseId, i, j + k]++;
+        }
+        
         public void generateHtml(string s, Schedule r)
         {
             TextWriter f = new StreamWriter(s);
@@ -241,7 +262,7 @@ namespace ProRa
                 {
                     if (r.matrica[c.getID(), k.getID()] == 0)
                     {
-       //                 s[4] += c.brojPreklapanja(k);
+                        s[4] += brojPreklapanja(c, k);
 
                     }
                 }
@@ -323,8 +344,11 @@ namespace ProRa
             {
                 profesori[l, i, j + k] = 0;
             }
-
-            e.getCourse().removeEvent(i, j, t);
+            for (int k = 0; k < t; k++)
+            {
+                kolegiji[e.getCourse().getID(), i, j + k] --;
+            }
+            //e.getCourse().removeEvent(i, j, t);
             
             eventi[EventId, 2] = 0;
             eventi[EventId, 3] = 0;
@@ -354,7 +378,11 @@ namespace ProRa
             {
                 profesori[l, i, j + k] = EventId;
             }
-            e.getCourse().setEvent(i, j, e);
+            //e.getCourse().setEvent(i, j, e);
+            for (int k = 0; k < t; k++)
+            {
+                kolegiji[e.getCourse().getID(), i, j + k]--;
+            }
         }
         public string drawGroupSchedule(int g, Schedule p)
         {
