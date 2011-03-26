@@ -17,6 +17,8 @@ namespace ProRa
         public Form1()
         {
             InitializeComponent();
+            numericUpDown1.Value = 200;
+            textBox1.Text = Convert.ToString(1);
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -48,7 +50,7 @@ namespace ProRa
             if (openFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 podaci.populateEventList(openFileDialog1.FileName);
-                button6.Enabled = true;
+                button10.Enabled = true;
             }
         }
 
@@ -91,7 +93,16 @@ namespace ProRa
         private void button6_Click(object sender, EventArgs e)
         {
             best = podaci.timetabler();
+            int[] bad0 = new int[7];
+            bad0 = best.evaluateSchedule(podaci);
+            label3.Text = bad0[0].ToString();
+            label4.Text = bad0[3].ToString();
+            label5.Text = bad0[1].ToString();
+            label16.Text = bad0[4].ToString();
             button7.Enabled = true;
+            MessageBox.Show("Timetabler je završio",
+        "Obavijest",
+        MessageBoxButtons.OK);
         }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
@@ -173,7 +184,7 @@ namespace ProRa
         private void button9_Click(object sender, EventArgs e)
         {
             progressBar1.Minimum = 0;
-            progressBar1.Maximum = 100;
+            progressBar1.Maximum = (int)numericUpDown1.Value;
             progressBar1.Step = 1;
             backgroundWorker1.RunWorkerAsync();   
         }
@@ -190,8 +201,9 @@ namespace ProRa
             bad0 = temp.evaluateSchedule(podaci);
             label3.Text = bad0[0].ToString();
             label4.Text = bad0[3].ToString();
-            label5.Text = bad0[4].ToString();
-            temp.generateHtml("temp.html", podaci);
+            label5.Text = bad0[1].ToString();
+            label16.Text = bad0[4].ToString();
+            //temp.generateHtml("temp.html", podaci);
             //best = temp.deepCopy();
             //Console.WriteLine("{0}", temp.getScore());
             
@@ -199,7 +211,8 @@ namespace ProRa
             int br = 0;
             int promjenjeniEvent = 0;
             bool foo = false;
-            while (br < 100)
+            double stop = Double.Parse(textBox1.Text);
+            while (br < numericUpDown1.Value && best.Score < stop)
             {
                 label2.Text = br.ToString();
                 progressBar1.PerformStep();
@@ -218,7 +231,7 @@ namespace ProRa
                 {
                     int eventId = f.Id;
                     int LecId = f.getLecturer().Id;
-                    //if (f.tabu != 0 && korak - f.tabu < 70) continue; 
+                   // if (f.tabu != 0 && korak - f.tabu < 0) continue; 
                     int t = f.Duration;
                     foreach (Classroom c in podaci.ClassroomList)
                     {
@@ -275,16 +288,18 @@ namespace ProRa
                                         {
                                             label10.Text = bad0[0].ToString();
                                             label11.Text = bad0[3].ToString();
-                                            label12.Text = bad0[4].ToString();
+                                            label12.Text = bad0[1].ToString();
+                                            label17.Text = bad0[4].ToString();
                                             best = new Raspored(eval);
-                                            label1.Text = best.Score.ToString();
+                                            label1.Text = best.Score.ToString().Substring(0, Math.Min(10, best.Score.ToString().Length));
                                             //string html = best.drawGroupSchedule(best.findGroup("MA1_1"));
                                             //webBrowser1.DocumentText = html;
                                             //Console.WriteLine("{0}", best.getScore());
                                             //best.generateHtml("best.html");
                                             promjenjeniEvent = f.getID();
+                                            //f.tabu = 10;
                                             stuck = false;
-                                            temp.generateHtml("stuck.html", podaci);
+                                            //temp.generateHtml("stuck.html", podaci);
                                         }
                                   /*      if (eval.getScore() > localBest.getScore())
                                         {
@@ -306,13 +321,14 @@ namespace ProRa
 					//label2.Text = br.ToString();
                     int[] bad = new int[7];
                     bad = best.evaluateSchedule(podaci);
-                    label10.Text = bad[0].ToString();
-                    label11.Text = bad[3].ToString();
-                    label12.Text = bad[4].ToString();
-                    temp.generateHtml("stuck.html", podaci);
+                    label10.Text = bad0[0].ToString();
+                    label11.Text = bad0[3].ToString();
+                    label12.Text = bad0[1].ToString();
+                    label17.Text = bad0[4].ToString();
+                    //temp.generateHtml("stuck.html", podaci);
                 }
                 temp = new Raspored(best);
-                //temp.getEventByID(promjenjeniEvent).tabu = korak;
+                podaci.getEventByID(promjenjeniEvent).tabu = korak;
                 //label2.Text = promjenjeniEvent.ToString();
                 
             }
@@ -347,6 +363,7 @@ namespace ProRa
                    // dataGridView1.Rows.Add(row);
                 //}
             }
+            button6.Enabled = true;
         }
 
         private void label9_Click(object sender, EventArgs e)

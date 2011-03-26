@@ -61,7 +61,15 @@ namespace ProRa
             score = 0;
             view = 0;
         }
-
+        public int brojNula(int id, int day)
+        {
+            int load = 0;
+            for (int i = 0; i < 12; i++)
+                if (grupe[id, day, i] == 0)
+                    load++;
+                else return load;
+            return load;
+        }
         public bool IsRoomAvailable(int roomId, int i, int j, int t)
         {
             int status = 0;
@@ -74,7 +82,7 @@ namespace ProRa
             else
                 return false;
         }
-        public int brojPreklapanja(Course k, Course c)
+        public int brojPreklapanja(int k, int c)
         {
             
             int r = 0;
@@ -82,7 +90,7 @@ namespace ProRa
             {
                 for (int j = 0; j < 12; j++)
                 {
-                    if (kolegiji[k.getID(), i, j] > 0 && kolegiji[k.getID(), i, j] > 0)
+                    if (kolegiji[k, i, j] > 0 && kolegiji[c, i, j] > 0)
                         r++;
                 }
             }
@@ -200,8 +208,8 @@ namespace ProRa
         {
             score = 0;
             double suma = 0;
-            double[] w = { 10, 1, 10, 70, 100, 0, 1 };
-            int[] s = { 0, 0, 0, 0, 0, 0, 0 };
+            double[] w = { 2, 1, 1, 7, 10};
+            int[] s = { 0, 0, 0, 0, 0};
             //list<Group>::iterator it;
             //for (it = groupList.begin(); it != groupList.end(); it++) {
             //foreach (Group it in GroupList)
@@ -212,9 +220,9 @@ namespace ProRa
                     int load = GroupDayLoad(id, i);
                     if (load > 6)
                         s[0] += (load - 6);
-                    //else if (load < 3)
+                   // else if (load < 3)
                     //s[0] += load;
-                    //s[1] += it.prijeDeset(i);
+                    s[1] += brojNula(id, i);
                     s[2] += IzaPet(id, i);
                     s[3] += GroupBrojRupa(id, i);
                     //s[5] += it.praznoPrije(i);
@@ -256,11 +264,11 @@ namespace ProRa
                      }
                  }
              }*/
-            foreach (Course c in r.CourseList)
+            for(int  c = 0; c < r.CourseList.Count; c++)
             {
-                foreach (Course k in r.CourseList)
+                for(int  k = c+1; k < r.CourseList.Count; k++)
                 {
-                    if (r.matrica[c.getID(), k.getID()] == 0)
+                    if (r.matrica[c, k] == 0)
                     {
                         s[4] += brojPreklapanja(c, k);
 
@@ -272,7 +280,7 @@ namespace ProRa
 
 
 
-            for (int i = 0; i < 7; i++)
+            for (int i = 0; i < 5; i++)
                 suma += (w[i] * s[i]);
             score = 1 / (1 + suma);
             return s;
@@ -381,7 +389,7 @@ namespace ProRa
             //e.getCourse().setEvent(i, j, e);
             for (int k = 0; k < t; k++)
             {
-                kolegiji[e.getCourse().getID(), i, j + k]--;
+                kolegiji[e.getCourse().getID(), i, j + k]++;
             }
         }
         public string drawGroupSchedule(int g, Schedule p)

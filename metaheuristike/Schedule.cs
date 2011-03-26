@@ -20,10 +20,11 @@ namespace ProRa
         public double getScore() { return score; }
         public int view = 0;
         Random r = new Random();
-        public int[,] matrica = new int[22,22];
+        public int[,] matrica; 
 
         public void populateMatrix(string filename)
         {
+            matrica = new int[CourseList.Count, CourseList.Count];
             StreamReader myFile = new StreamReader(filename);
             string myString = myFile.ReadToEnd();
 
