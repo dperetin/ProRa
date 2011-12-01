@@ -12,6 +12,11 @@ namespace ProRa
 	    Course kolegij;
 	    List<string> grupe;
 	    int duration;
+        int f;
+        public int F {
+            get { return f; }
+            set { f = value; }
+        }
         public int tabu = 0;
 	    Classroom C;
 

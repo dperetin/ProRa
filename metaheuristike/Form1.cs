@@ -32,7 +32,7 @@ namespace ProRa
             {
                 podaci.populateCourseList(openFileDialog1.FileName);
                 button3.Enabled = true;
-                foreach (Course k in podaci.CourseList)
+                /*foreach (Course k in podaci.CourseList)
                 {
                     string[] row = { k.getIsvu(), 
                                      k.needsProjector().ToString(), 
@@ -40,7 +40,7 @@ namespace ProRa
                                      k.getName() };
                     
                     dataGridView1.Rows.Add(row);
-                }
+                }*/
             }
             
         }
@@ -69,7 +69,7 @@ namespace ProRa
             {
                 podaci.populateClassroomList(openFileDialog1.FileName);
                 button5.Enabled = true;
-                foreach (Classroom k in podaci.ClassroomList)
+                /*foreach (Classroom k in podaci.ClassroomList)
                 {
                     string[] row = { k.getID(), 
                                      k.getCapacity().ToString(), 
@@ -77,7 +77,7 @@ namespace ProRa
                                      k.getType().ToString() };
                     
                     dataGridView2.Rows.Add(row);
-                }
+                }*/
             }
         }
 
@@ -100,6 +100,16 @@ namespace ProRa
             label5.Text = bad0[1].ToString();
             label16.Text = bad0[4].ToString();
             button7.Enabled = true;
+
+            best.view = 1;
+            comboBox1.Items.Clear();
+            comboBox1.BeginUpdate();
+            foreach (Group g in podaci.GroupList)
+            {
+                comboBox1.Items.Add(g.getName());
+            }
+            comboBox1.EndUpdate();
+
             MessageBox.Show("Timetabler je završio",
         "Obavijest",
         MessageBoxButtons.OK);
@@ -206,7 +216,8 @@ namespace ProRa
             //temp.generateHtml("temp.html", podaci);
             //best = temp.deepCopy();
             //Console.WriteLine("{0}", temp.getScore());
-            
+
+            int tb = podaci.EventList.Count / 10;
             int korak = 0;
             int br = 0;
             int promjenjeniEvent = 0;
@@ -231,7 +242,7 @@ namespace ProRa
                 {
                     int eventId = f.Id;
                     int LecId = f.getLecturer().Id;
-                   // if (f.tabu != 0 && korak - f.tabu < 0) continue; 
+                    if (f.tabu != 0 && korak - f.tabu < tb) continue; 
                     int t = f.Duration;
                     foreach (Classroom c in podaci.ClassroomList)
                     {
@@ -329,6 +340,7 @@ namespace ProRa
                 }
                 temp = new Raspored(best);
                 podaci.getEventByID(promjenjeniEvent).tabu = korak;
+                podaci.getEventByID(promjenjeniEvent).F++;
                 //label2.Text = promjenjeniEvent.ToString();
                 
             }
@@ -338,7 +350,7 @@ namespace ProRa
         private void button7_Click(object sender, EventArgs e)
         {
             //string sadrzajDatoteke = podaci.generateHtml();
-         /*   saveFileDialog1.Title = "Spremi datoteku.";
+            saveFileDialog1.Title = "Spremi datoteku.";
             string temp = "raspored.html";
             
             saveFileDialog1.FileName = temp;
@@ -346,8 +358,8 @@ namespace ProRa
             if (saveFileDialog1.FileName != "")
             {
                 //TextWriter f = new StreamWriter(saveFileDialog1.FileName);
-                best.generateHtml(saveFileDialog1.FileName);
-            }*/
+                best.generateHtml(saveFileDialog1.FileName, podaci);
+            }
         }
 
         private void button10_Click(object sender, EventArgs e)
