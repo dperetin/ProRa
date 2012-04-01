@@ -22,3 +22,11 @@ C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\
 C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\ProRa.Form1.resources
 C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.Properties.Resources.resources
 C:\Users\Dejan\Desktop\Metaheuristike\metaheuristike\metaheuristike\obj\Release\metaheuristike.csproj.GenerateResource.Cache
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\obj\Release\metaheuristike.exe
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\obj\Release\metaheuristike.pdb
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\bin\Release\metaheuristike.exe
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\bin\Release\metaheuristike.pdb
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\obj\Release\ResolveAssemblyReference.cache
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\obj\Release\ProRa.Form1.resources
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\obj\Release\metaheuristike.Properties.Resources.resources
+C:\Users\Ivana\Documents\dejan\ProRa\ProRa\metaheuristike\obj\Release\metaheuristike.csproj.GenerateResource.Cache
